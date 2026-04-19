@@ -908,3 +908,24 @@ class HopfieldLayer(Module):
     @property
     def normalize_pattern_projection_affine(self) -> bool:
         return self.hopfield.normalize_pattern_projection_affine
+
+
+# Diffusion-augmented variant -- imported *after* Hopfield is fully defined to
+# avoid a circular import (diffused_attention.py does 'from . import Hopfield').
+from .diffused_attention import DiffusedHopfield  # noqa: E402
+from .attention_operator import AttentionOperator  # noqa: E402
+from .diffusion import (  # noqa: E402
+    DiffusionOperator,
+    SimpleDiffusion,
+    IterativeDiffusion,
+    SpectralDiffusion,
+    FactoredDiffusion,
+    apply_diffusion,
+)
+from .dynamics_engine import (  # noqa: E402
+    DiffusionConfig,
+    GraphCache,
+    EnergyTracker,
+    DynamicsEngine,
+)
+from .graph import GraphBuilder, LaplacianBuilder  # noqa: E402
